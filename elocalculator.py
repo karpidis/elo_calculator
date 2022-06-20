@@ -1,3 +1,4 @@
+import input_checker
 # This program calculates elo rating on a tournament for a player if we know all of his rated opponents
 # Fide table for the probability of win for a higher rated opponent
 
@@ -12,23 +13,29 @@ rows = len(table_pd)
 
 
 def main():
-    starting_rating = int(input("What is your rating?\t", ))
-    opponent_rating = int(input("What is your opponent's rating?\t", ))
-    while True:
-        resulta = int(input("what is the result", ))
-        if resulta == 0 or resulta == 0.5 or resulta == 1:
-            break
-        else:
-            print("Use 0 for loss, 0.5 for draw, 1 for win")
-
-    development_coefficient = int(input("Which is your K\t", ))
+    starting_rating = input_checker.input_my_elo()
+    opponent_rating = input_checker.input_opponent_elo()
+    development_coefficient = input_checker.input_k_factor()
+    resulta = input_checker.input_result()
 
     print(difr(starting_rating, opponent_rating, resulta, development_coefficient))
 
 
-def difr(elo1, elo2, result, k):
+def difr(elo1: int, elo2: int, result: float, k: int) -> object:
+    """(int,int,float,int) -> float
+    Return rating difference base on 2 players ratings, result and development coefficient.
+
+    >>> difr(1500, 1500, 0.5, 20)
+    0.0
+    >>> difr(1600, 1725, 1, 20)
+    13.4
+    >>> difr(1600, 1725, 0, 20)
+    -6.6
+    >>> difr(2000, 0, 1, 20)
+    0.0
+    """
     if elo2 == 0:
-        return 0
+        return 0.0
     else:
         dif = elo1 - elo2
         if abs(dif) >= 400:
