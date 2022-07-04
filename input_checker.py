@@ -24,6 +24,18 @@ def check_result(result):
         input_result()
 
 
+def check_rounds(rounds):
+    try:
+        valuate_rounds = int(rounds)
+        if valuate_rounds >= 0:
+            return valuate_rounds
+        else:
+            print("You didn't give a valid number of rounds")
+            input_rounds()
+    except ValueError:
+        print("Not valid format of rounds")
+        input_rounds()
+
 def check_k(kappa):
     try:
         valuatek = int(kappa)
@@ -59,6 +71,12 @@ def input_result():
     result = input("what is the result", )
     result = check_result(result)
     return result
+
+
+def input_rounds():
+    rounds = input('How many rounds was the tournament')
+    rounds = check_rounds(rounds)
+    return rounds
 
 
 def main():

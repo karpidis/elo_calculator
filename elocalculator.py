@@ -1,4 +1,5 @@
 import input_checker
+
 # This program calculates elo rating on a tournament for a player if we know all of his rated opponents
 # Fide table for the probability of win for a higher rated opponent
 
