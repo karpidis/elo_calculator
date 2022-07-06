@@ -13,3 +13,4 @@ file = open("player_group.json", "w")
 file.write(json_obj)
 
 file.close()
+

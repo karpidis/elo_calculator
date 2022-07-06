@@ -11,6 +11,18 @@ def check_elo(elo):
         input_my_elo()
 
 
+def check_rank(rank, list_of_players):
+    try:
+        valuate_rank = int(rank)
+        while valuate_rank not in range(1, len(list_of_players) + 1):
+            print("Not a valid rank")
+            break
+        else:
+            return valuate_rank
+    except ValueError:
+        print("Not a valid format of rank")
+
+
 def check_result(result):
     try:
         valuate_result = float(result)
@@ -35,6 +47,7 @@ def check_rounds(rounds):
     except ValueError:
         print("Not valid format of rounds")
         input_rounds()
+
 
 def check_k(kappa):
     try:
@@ -65,6 +78,19 @@ def input_k_factor():
     k_factor = input("Which is your K\t", )
     k_factor = check_k(k_factor)
     return k_factor
+
+
+def input_rank(list_of_players: list):
+    names_rank = {}
+    for name in list_of_players:
+        rank = None
+        while rank is None:
+            rank = input("What is the rank of " + name + "\t", )
+            rank = check_rank(rank, list_of_players)
+        else:
+            names_rank[name] = rank
+    print(names_rank)
+    return names_rank
 
 
 def input_result():
