@@ -22,7 +22,7 @@ def main():
     print(difr(starting_rating, opponent_rating, resulta, development_coefficient))
 
 
-def difr(elo1: int, elo2: int, result: float, k: int) -> object:
+def difr(elo1: int, elo2: int, result: float, k: int) -> float:
     """(int,int,float,int) -> float
     Return rating difference base on 2 players ratings, result and development coefficient.
 

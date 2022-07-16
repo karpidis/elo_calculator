@@ -49,6 +49,19 @@ def check_rounds(rounds):
         input_rounds()
 
 
+def check_number_of_players(players):
+    try:
+        valuate_players = int(players)
+        if valuate_players >= 0:
+            return valuate_players
+        else:
+            print("You didn't give a valid number of players")
+            input_number_of_players()
+    except ValueError:
+        print("Not valid format of number of players")
+        input_number_of_players()
+
+
 def check_k(kappa):
     try:
         valuatek = int(kappa)
@@ -81,6 +94,7 @@ def input_k_factor():
 
 
 def input_rank(list_of_players: list):
+    """I have to check if more than one player share the same rank"""
     names_rank = {}
     for name in list_of_players:
         rank = None
@@ -89,8 +103,18 @@ def input_rank(list_of_players: list):
             rank = check_rank(rank, list_of_players)
         else:
             names_rank[name] = rank
-    print(names_rank)
     return names_rank
+
+
+def input_rank_dict(list_of_players):
+    for name in list_of_players:
+        rank = None
+        while rank is None:
+            rank = input("What is the rank of " + name["name"] + "\t", )
+            rank = check_rank(rank, list_of_players)
+        else:
+            name["rank"] = rank
+    return list_of_players
 
 
 def input_result():
@@ -103,6 +127,12 @@ def input_rounds():
     rounds = input('How many rounds was the tournament')
     rounds = check_rounds(rounds)
     return rounds
+
+
+def input_number_of_players():
+    players = input('How many players will play?')
+    players = check_number_of_players(players)
+    return players
 
 
 def main():

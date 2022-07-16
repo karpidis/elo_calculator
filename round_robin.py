@@ -21,11 +21,10 @@ def pairing_every_round(number_of_round, players_list):
     return pairing_list
 
 
-def create_anonymous_list():
-    number_of_players = input_number_of_players()
+def create_anonymous_list(number_of_players):
+    #   number_of_players = input_number_of_players()
     if number_of_players % 2 == 1:
         number_of_players += 1
-        print("Max number is the bye of the round")
     return [str(x) for x in range(1, number_of_players + 1)]
 
 
@@ -33,14 +32,14 @@ def create_moved_list(list_of_players):
     number_of_players = len(list_of_players)
     half_list_len = int(number_of_players/2)
 
-    first_player = list_of_players.pop(len(list_of_players)-1)
+    last_seat = list_of_players.pop(len(list_of_players) - 1)
 
     list_of_players.extend(x for x in list_of_players[0:half_list_len])
     list_of_players[0:half_list_len-1] = list_of_players[half_list_len:number_of_players-1]
 
     del list_of_players[half_list_len-1:number_of_players-1]
 
-    list_of_players.append(first_player)
+    list_of_players.append(last_seat)
 
     return list_of_players
 
@@ -57,8 +56,18 @@ def create_all_pairings(player_list):
 
 
 def main():
-    players_list = create_anonymous_list()
-    print(create_all_pairings(players_list))
+    tables = open("berger_tables.txt", "w")
+    for players_number in range(3, 101, 2):
+        players_list = create_anonymous_list(players_number)
+        players_table = "\t\tTable for " + str(players_number) + ", " + str(players_number+1) + "players\n"
+        warning = "If " + str(players_number) + " players, then " + str(players_number+1) + " represents bye.\n"
+
+        tables.write(players_table)
+        tables.write(warning)
+        tables.write(create_all_pairings(players_list))
+        tables.write("\n\n")
+    tables.close()
 
 
-main()
+if __name__ == '__main__':
+    main()

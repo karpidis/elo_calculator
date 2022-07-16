@@ -10,7 +10,7 @@ def get_opponents_elo_results():
 
 def total_elo_calculator(elo1: int, elo_opponents_results: list, k):
     elo_list = [elocalculator.difr(elo1, elo_opponents_results[gyros][0], elo_opponents_results[gyros][1], k) for gyros in range(len(elo_opponents_results))]
-    return sum(elo_list),(elo1+sum(elo_list))
+    return sum(elo_list), (elo1+sum(elo_list))
 
 
 def main():
