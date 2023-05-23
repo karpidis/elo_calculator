@@ -1,6 +1,5 @@
 from PyQt6.QtWidgets import (QApplication, QWidget, QVBoxLayout, QPushButton, QLabel, QLineEdit, QInputDialog,
                              QSpinBox, QComboBox, QMessageBox)
-
 import sys
 # import your Elo calculator and input checker modules
 import elocalculator
@@ -10,7 +9,7 @@ class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
 
-        self.setWindowTitle('Elo Calculator Main')
+        self.setWindowTitle('Elo Calculator by Andreas Kontokanis')
         layout = QVBoxLayout()
 
         self.start_button = QPushButton('Tournament Elo Calculation')
@@ -32,11 +31,15 @@ class EloCalculatorApp(QWidget):
         self.init_ui()
 
     def init_ui(self):
-        self.setWindowTitle('Elo Calculator')
+        self.setWindowTitle('Tournament Elo Calculator')
         layout = QVBoxLayout()
 
-        self.my_elo_edit = QLineEdit()
-        self.k_factor_edit = QLineEdit()
+        self.my_elo_edit = QSpinBox()
+        self.my_elo_edit.setRange(800, 3500)  # Setting range
+        self.my_elo_edit.setValue(1600)
+        self.k_factor_edit = QComboBox()
+        self.k_factor_edit.addItems(['10', '15', '20', '30', '40'])
+        self.k_factor_edit.setCurrentText("20")
 
         self.calculate_button = QPushButton('Calculate')
         self.calculate_button.clicked.connect(self.calculate_elo)
@@ -77,7 +80,6 @@ class EloCalculatorApp(QWidget):
 
             self.layout().addWidget(self.calculate_button)
 
-
     def total_elo_calculator(self, elo1: int, elo_opponents_results: list, k):
         elo_opponents_results.sort()
         beneficial_opponent = elo_opponents_results.pop(0)
@@ -88,8 +90,8 @@ class EloCalculatorApp(QWidget):
 
     def calculate_elo(self):
         try:
-            my_elo = int(self.my_elo_edit.text())
-            k_factor = int(self.k_factor_edit.text())
+            my_elo = self.my_elo_edit.value()
+            k_factor = int(self.k_factor_edit.currentText())
 
             opponents_elo_results = []
             for i in range(self.rounds):
@@ -115,6 +117,7 @@ def main():
     window.show()
 
     sys.exit(app.exec())
+
 
 if __name__ == "__main__":
     main()
