@@ -86,7 +86,7 @@ class EloCalculatorApp(QWidget):
 
     # Function to set the number of rounds and add corresponding widgets for opponent Elo and result
     def set_rounds(self):
-        num_rounds, ok = QInputDialog.getInt(self, 'Number of Rounds', 'Enter number of rounds:')
+        num_rounds, ok = QInputDialog.getInt(self, 'Number of Rounds', 'Enter number of rounds:', 1, 1, 20)
         if ok:
             self.rounds = num_rounds
             self.opponent_elo_edits = []
