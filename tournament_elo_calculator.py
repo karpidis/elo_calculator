@@ -9,12 +9,10 @@ def get_opponents_elo_results():
 
 
 def total_elo_calculator(elo1: int, elo_opponents_results: list, k):
-    elo_opponents_results.sort()
-    beneficial_opponent = elo_opponents_results.pop(0)
-    beneficial_elo = elocalculator.difr400(elo1, beneficial_opponent[0], beneficial_opponent[1], k)
-    elo_list = [elocalculator.difr(elo1, elo_opponents_results[gyros][0], elo_opponents_results[gyros][1], k) for gyros in range(len(elo_opponents_results))]
-    total_elo_difference = beneficial_elo + sum(elo_list)
-    return total_elo_difference, (elo1+sum(elo_list))
+#   here is the list of elo points earned and lost
+    elo_dif_list = [elocalculator.difr400(elo1, elo_opponents_results[gyros][0], elo_opponents_results[gyros][1], k) for gyros in range(len(elo_opponents_results))]
+    total_elo_difference = sum(elo_dif_list)
+    return total_elo_difference, (elo1+total_elo_difference)
 
 
 def main():
