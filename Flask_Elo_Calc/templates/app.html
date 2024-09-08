@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Elo Calculator</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/app.css') }}"
+    />
+  </head>
+  <body>
+    <div class="header">
+      <h2>Flask Elo Calculator App</h2>
+      <small>Andreas Kontokanis</small>
+    </div>
+
+    <!-- Form -->
+    <div class="container">
+      <form action="/calculate" method="POST">
+        <div class="form-group">
+          <label for="my_elo">Your Elo</label>
+          <input type="number" id="my_elo" name="my_elo" placeholder="Enter your Elo" required />
+        </div>
+
+        <div class="form-group">
+          <label for="opponents_elo">Opponent's Elo</label>
+          <input type="number" id="opponents_elo" name="opponents_elo" placeholder="Enter opponent's Elo" required />
+        </div>
+
+        <div class="form-group">
+          <label for="result">Result</label>
+          <select id="result" name="result" required>
+            <option value="1">Win</option>
+            <option value="0.5">Draw</option>
+            <option value="0">Loss</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="k">K-factor</label>
+          <select id="k" name="k" required>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="40">40</option>
+          </select>
+        </div>
+
+        <input type="submit" value="Calculate" id="calc_btn" class="btn" />
+        <br />
+        <div class="alert">
+          {% if new_elo %}
+            Your new Elo rating is: {{ new_elo }}
+          {% elif error %}
+            <p>{{ error }}</p>
+          {% endif %}
+        </div>
+      </form>
+    </div>
+
+  </body>
+</html>
